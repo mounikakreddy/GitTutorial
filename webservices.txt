@@ -1,0 +1,177 @@
+1.	What are web services?
+Web services are independently running web components (serving as providers) that can be consumed by clients. They are hosted on network. XML data is interchanged between clients and servers. (Allows us to pass the data over internet in easy way)
+
+Web Services are generally consumed by software for example web applications or Java classes. Web Service is a web component or software program that can be accessed on the Internet.  
+
+Restful services can exchange JSON (Java Script Object Notation) format data also.
+
+Client sends a web request to the server(provider) and the server/Provider processes the request and then responds to client with a response.  XML response or JSON response will be returned based on the type of web service.
+
+Communication protocols like Soap over Http, Http are used for transferring data. 
+
+They are interoperable. Clients of any language may consume provider written in any language. Java client can consume .Net webservice and vice versa.
+
+2.	Service Layer (Domain Layer)
+Java Methods are used to perform Business logic. Functionality. Ex: createBankAccount, create Insurance Policy. These business logic methods are part of the Service Layer. Sometimes referred to as Domain Logic. Some companies refer to them as Middleware. They are also referred to as Business Components. Also known as API. (Application Programming Interface).
+
+3.	What Web Services did you use in your project?
+
+Take banking example. You want account information – give SSN or bank account number.
+This is service you want to use repeatedly. All applications would need this. These kinds of services are hosted as Web Services. Invoke them with the parameter ex: SSN and get back the Soap/Restful web service response. Parse the response and use the data,
+
+Updating the balance can be a web service. Getting Account Information, Get Customer information by passing parameters.
+
+Publishing the audit data can be a restful web service on the intranet. Audit data usually comprises who performed a transaction, when performed, what transaction, inputs, results.
+This is published for every transaction in the company. The data is saved in audit tables. This data is used for security audit like who performed the transaction. (restful web service POST method)
+
+Insurance: Get the Insurance policy for the customer using SSN, policy number.
+
+4.	What are the various Web Services we have?
+Soap and Restful.
+
+5.	What is SOAP?
+SOAP is a protocol for web services.
+SOAP means Simple Object Access Protocol. (SOAP can interact with other programming language applications).
+SOAP uses XML for data communication between web service provider and consumer.
+It is just a protocol which is XML based for accessing webservices over the internet.
+
+SOAP message(XML) has Soap envelope, Soap headers, Soap body.
+
+Soap Body contains Real data exchanged b/w services (Request [ssn, policy number], response data [policy details, type, limit])
+Header describes the data (description), encryption, authentication (user id, password)
+
+Soap body can have data which is the request data or the response data.
+If the web service fails to process the request, soap fault will appear in the response. 
+
+Soap Web Services use WSDL that describes the web service. (Web Service Description Language)
+Soap Advantages:
+1.Soap has its own security as WS Security.
+2. Language and platform independent.
+
+Disadvantages:
+1.	It supports only XML format. It has may standards which we have to follow while working with SOAP UI so that is the reason it is slow.
+2.	It works with WSDL file only. It doesn’t allow other formats like JSON, cookies etc.,
+Ex: 
+<?xml version="1.0"?>
+
+<soap:Envelope
+xmlns:soap="http://www.w3.org/2003/05/soap-envelope/"
+soap:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+
+<soap:Header>
+...
+</soap:Header>
+
+<soap:Body>
+...
+  <soap:Fault>
+  ...
+  </soap:Fault>
+</soap:Body>
+
+</soap:Envelope>
+Here soap: is a namespace, it can have its own elements they don’t want to have class for element names. They also can have company specific namespaces. These name spaces are defined in Soap Envelope as url.
+
+6.	What is Soap Fault?
+If an error occurs during processing, the response to a SOAP message is a SOAP fault element in the body of the message, and the fault is returned to the sender of the SOAP message.
+
+The SOAP fault mechanism returns specific information about the error, including a predefined code, a description.
+FaultCode, FaultString are added to Soap response message.
+Ex: Database Down, Java class not found.
+
+7.	What is Restful?
+REpresentational State Transfer (platform dependent).
+Restful is architecture to implement web services. 
+We use URL (URI) to invoke a restful web service.
+Restful supports multiple formats line XML, JSON, HTML, Plain text file to communicate between provider and consumer.
+Restful uses Http protocol to communicate on network.
+Restful uses Http methods for communication. Ex: POST PUT GET DELETE.
+Restful uses WADL. WADL is optional (Web Application Description Language)
+
+8.	Explain the differences between Soap and Rest?
+SOAP is a protocol and RESTful is architecture.  
+SOAP means Simple Object Access Protocol.
+
+REST supports different message formats – XML, JSON    but SOAP permits XML only.
+
+SOAP sends XML message request to provider to invoke Web service
+REST uses Uniform Resource Identifier (URI)/URL to invoke Webservices and it has the methods like GET, PUT, POST and DELETE to expose their resources.
+
+Soap web services use WSDL.  WSDL has interfaces and the operations(methods) that are part of web service.  WSDL is mandatory for SOAP. 
+Restful services use WADL. WADL is optional.  
+ 
+SOAP uses named operations(methods) and interfaces to achieve its business logics.
+
+REST services are faster and easy to handle (no specific message format). This is the reason Restful services became quite popular, In fact, even when they wanted to achieve scalability, they are using Restful web services to take advantage of the speed.
+
+SOAP is tied with SMTP and HTTP protocols whereas REST relies on HTTP only.
+
+SOAP is more secure and structured format.  Soap consists of WS Security protocol as part of specification. So SOAP more secure. 
+Restful uses security from underlying protocol used –Https.
+
+REST does not depend on any specific standards as it supports various messaging formats like JSON, CSV and XML.
+SOAP was introduced for distributed computing. After REST’s entry, it accommodated the web by its performance and scalability as it is a light weight component.
+Rest is stateless- provider does not know who is client.
+ 
+SOAP is state-full, provider remembers who the client is (based on cookie ID) based on the previous request it sends data.
+
+Check out this article for more information: http://www.softwaretestinghelp.com/soapui-tutorial-13-soap-vs-rest-services/
+
+9.	When we go for soap and Rest Services?
+Ans. SOAP WS or REST? In general, a REST based Web service is preferred due to its simplicity, performance, scalability, more transactions and support for multiple data formats. SOAP is favored where service requires comprehensive support for security and transactional reliability.
+The answer really depends on the functional and non-functional requirements.
+Asking the questions listed below will help you choose.
+*	Does the service expose data or business logic? (REST is a better choice for exposing data [CURD operations], SOAP WS might be a better choice for logic).
+*	Do the consumers and the service providers require a formal contract? (SOAP has a formal contract via WSDL)
+*	Is the call synchronous or asynchronous? Is the call stateful or stateless? (REST is suited for stateless CRUD operations)
+*	What level of security is required? (SOAP WS has better support for security)
+*	What level of transaction support is required? (SOAP WS has better support for transaction management)
+*	Do we have limited band width? (SOAP is more verbose, uses more Bandwidth)
+*	What’s best for the developers who will build clients for the service? (REST is easier to implement, test, and maintain)
+*	Do we need to support multiple data formats? Do we need to make AJAX calls? (REST can use the XMLHttpRequest)
+
+10.	What are Http Methods in Rest Services? Explain? What are the methods involved in Rest?
+POST – to create records ex: Create a bank account
+PUT – to update data or existing record ex: update customer address, update insurance policy.
+GET – Read the data ex: get Account information
+DELETE – for Delete of data (do not delete physically, flag is set to deleted)
+These are the HTTP Methods for RESTful Services.
+
+11. POST and PUT difference?
+PUT is idempotent (if change is made number of times, it will make no difference) setting delivery address for order
+POST is not idempotent, payment or purchasing something
+The whole key is whether you're doing an idempotent change or not. That is, if taking action on the message twice will result in “the same” thing being there as if it was only done once, you've got an idempotent change and it should be mapped to PUT. If not, it maps to POST. If you never permit the client to synthesize URLs, PUT is pretty close to Update and POST can handle Create just fine, but that's most certainly not the only way to do it; if the client knows that it wants to create /foo/abc and knows what content to put there, it works just fine as a PUT.
+
+The canonical description of a POST is when you're committing to purchasing something: that's an action which nobody wants to repeat without knowing it. By contrast, setting the dispatch address for the order beforehand can be done with PUT just fine: it doesn't matter if you are told to send to 6 Anywhere Dr, Nowhereville once, twice or a hundred times: it's still the same address. Does that mean that it's an update? Could be… It all depends on how you want to write the back-end. (Note that the results might not be identical: you could report back to the user when they last did a PUT as part of the representation of the resource, which would ensure that repeated PUTs do not cause an identical result, but the result would still be “the same” in a functional sense.)
+
+12.	What is WSDL?
+
+Soap web services use WSDL.
+WSDL stands for Web Services Description Language and is a document written in XML.
+It is the standard format for describing a web service.
+
+ It uses XML to define the service layer document which consists of origin(URL) of the web service, headers, request and response data. 
+
+What interface can be used to access web service. This one can provide the information web service operations(methods) and request and response message formats. Schemas are used for the purpose.
+
+It describes:
+Origin of the web service (URI)
+Header information
+Port type 
+Input and output messages
+
+13.	What are Http status codes? Give examples?
+
+S.N.	Code and Description
+1	1xx: Informational
+It means the request has been received and the process is continuing.
+2	2xx: Success
+It means the action was successfully received, understood, and accepted.
+3	3xx: Redirection
+It means further action must be taken to complete the request.
+4	4xx: Client Error
+It means the request contains incorrect syntax or cannot be fulfilled.
+5	5xx: Server Error
+It means the server failed to fulfill an apparently valid request. Ex: Database error (Internal Server Error)
+
+
